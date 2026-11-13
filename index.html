@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Головна — каталог техніки</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800&display=swap">
+  <link rel="stylesheet" href="style.css">
+  <script type="module" src="script.js" defer></script>
+</head>
+<body>
+
+  <!-- ===== SVG-спрайт іконок (використання: <svg class="icon"><use href="#i-name"/></svg>) ===== -->
+  <svg class="sprite" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
+    <symbol id="i-map-pin" viewBox="0 0 24 24"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></symbol>
+    <symbol id="i-chevron-down" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></symbol>
+    <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="5"/><path d="M20 21a8 8 0 0 0-16 0"/></symbol>
+    <symbol id="i-heart" viewBox="0 0 24 24"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></symbol>
+    <symbol id="i-bag" viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></symbol>
+    <symbol id="i-grid" viewBox="0 0 24 24"><rect width="7" height="7" x="3" y="3" rx="1"/><rect width="7" height="7" x="14" y="3" rx="1"/><rect width="7" height="7" x="14" y="14" rx="1"/><rect width="7" height="7" x="3" y="14" rx="1"/></symbol>
+    <symbol id="i-sliders" viewBox="0 0 24 24"><path d="M21 4h-7M10 4H3M21 12h-9M8 12H3M21 20h-5M12 20H3M14 2v4M8 10v4M16 18v4"/></symbol>
+    <symbol id="i-reset" viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></symbol>
+    <symbol id="i-star" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></symbol>
+    <symbol id="i-zap" viewBox="0 0 24 24"><path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"/></symbol>
+  </svg>
+
+  <a class="skip-link" href="#catalog">Перейти до каталогу</a>
+
+  <!-- ===================== HEADER ===================== -->
+  <header class="site-header">
+
+    <div class="topbar">
+      <div class="container topbar__inner">
+        <div class="topbar__group">
+          <button class="topbar__city" type="button" data-action="choose-city">
+            <svg class="icon icon--xs"><use href="#i-map-pin"/></svg>
+            <span>Київ</span>
+            <svg class="icon icon--xs"><use href="#i-chevron-down"/></svg>
+          </button>
+          <span class="topbar__text topbar__text--hide-sm">Доставка по всій Україні</span>
+        </div>
+        <nav class="topbar__group topbar__group--hide-sm" aria-label="Інформація">
+          <a class="topbar__link" href="#">Доставка й оплата</a>
+          <a class="topbar__link" href="#">Гарантія та повернення</a>
+          <a class="topbar__link" href="#">Контакти</a>
+          <a class="topbar__link" href="tel:0800300125">0 800 300 125</a>
+          <button class="topbar__lang" type="button" data-action="toggle-lang">УКР</button>
+        </nav>
+      </div>
+    </div>
+
+    <div class="container header-main">
+      <a class="logo" href="./" aria-label="ВОЛЬТ — на головну">
+        <svg class="icon logo__icon"><use href="#i-zap"/></svg>
+        <span class="logo__text">ВОЛЬТ<span class="logo__dot">.</span></span>
+      </a>
+
+      <form class="search" id="search-form" role="search">
+        <svg class="icon search__icon"><use href="#i-search"/></svg>
+        <input class="search__input" id="search" name="q" type="search"
+               placeholder="Знайти смартфон, планшет або ноутбук"
+               autocomplete="off" aria-label="Пошук товарів">
+        <kbd class="search__hint">⌘ K</kbd>
+      </form>
+
+      <div class="header-actions">
+        <button class="action" type="button" data-action="open-login">
+          <svg class="icon"><use href="#i-user"/></svg>
+          <span class="action__label">Увійти</span>
+        </button>
+        <button class="action" type="button" data-action="open-wishlist" aria-label="Обране">
+          <svg class="icon"><use href="#i-heart"/></svg>
+          <span class="count-badge" id="wishlist-count" hidden>0</span>
+        </button>
+        <button class="action action--cart" type="button" data-action="open-cart" aria-expanded="false" aria-controls="cart-drawer">
+          <svg class="icon"><use href="#i-bag"/></svg>
+          <span class="action__label">Кошик</span>
+          <span class="count-badge" id="cart-count">0</span>
+        </button>
+      </div>
+    </div>
+
+    <nav class="main-nav" aria-label="Категорії">
+      <div class="container main-nav__inner">
+        <ul class="main-nav__list">
+          <li>
+            <a class="main-nav__catalog" href="#catalog" data-category="all">
+              <svg class="icon"><use href="#i-grid"/></svg>
+              <span>Каталог товарів</span>
+            </a>
+          </li>
+          <li><a class="main-nav__link" href="?category=smartphone" data-category="smartphone">Смартфони</a></li>
+          <li><a class="main-nav__link" href="?category=tablet" data-category="tablet">Планшети</a></li>
+          <li><a class="main-nav__link" href="?category=laptop" data-category="laptop">Ноутбуки</a></li>
+        </ul>
+        <ul class="main-nav__list main-nav__list--right">
+          <li><a class="main-nav__link main-nav__link--accent" href="#" data-filter-preset="deals">Вигідні пропозиції</a></li>
+          <li><a class="main-nav__link main-nav__link--muted" href="#">Допомога з вибором ↗</a></li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <!-- ===================== BREADCRUMBS + HERO ===================== -->
+    <div class="container intro">
+      <nav class="breadcrumbs" aria-label="Навігаційний ланцюжок">
+        <ol class="breadcrumbs__list">
+          <li><a href="./">Головна</a></li>
+          <li aria-current="page">Каталог</li>
+        </ol>
+      </nav>
+
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="hero__content">
+          <p class="hero__eyebrow">ТЕХНІКА ДЛЯ ТВОГО РИТМУ</p>
+          <h1 class="hero__title" id="hero-title">Більше можливостей.<br>Щодня.</h1>
+          <p class="hero__text">Смартфони, планшети та ноутбуки. Обирай своє.</p>
+        </div>
+        <img class="hero__image" src="bg.png" alt="">
+      </section>
+    </div>
+
+    <!-- ===================== КАТАЛОГ ===================== -->
+    <section class="container catalog" id="catalog" aria-labelledby="catalog-title">
+
+      <div class="catalog__head">
+        <div class="catalog__title-group">
+          <h2 class="catalog__title" id="catalog-title">Каталог техніки</h2>
+          <p class="catalog__count" id="results-count" aria-live="polite">6 товарів</p>
+        </div>
+        <div class="sort">
+          <label class="sort__label" for="sort">Сортувати:</label>
+          <div class="select">
+            <select class="select__control" id="sort" name="sort">
+              <option value="popularity">За популярністю</option>
+              <option value="price-asc">Від дешевих до дорогих</option>
+              <option value="price-desc">Від дорогих до дешевих</option>
+              <option value="rating">За рейтингом</option>
+              <option value="discount">За знижкою</option>
+            </select>
+            <svg class="icon icon--sm select__icon"><use href="#i-chevron-down"/></svg>
+          </div>
+        </div>
+      </div>
+
+      <div class="catalog__body">
+
+        <!-- ---------- Фільтри ---------- -->
+        <aside class="sidebar" aria-label="Фільтри">
+          <form class="filters" id="filters" autocomplete="off">
+            <div class="filters__head">
+              <h3 class="filters__title">Фільтри</h3>
+              <svg class="icon"><use href="#i-sliders"/></svg>
+            </div>
+
+            <!-- Категорія -->
+            <details class="filter" open>
+              <summary class="filter__summary">
+                <span>Категорія</span>
+                <svg class="icon icon--sm filter__chevron"><use href="#i-chevron-down"/></svg>
+              </summary>
+              <div class="filter__body" data-filter-group="category">
+                <label class="check"><input type="checkbox" name="category" value="smartphone"><span class="check__label">Смартфони</span><span class="check__count" data-count="category:smartphone">2</span></label>
+                <label class="check"><input type="checkbox" name="category" value="tablet"><span class="check__label">Планшети</span><span class="check__count" data-count="category:tablet">2</span></label>
+                <label class="check"><input type="checkbox" name="category" value="laptop"><span class="check__label">Ноутбуки</span><span class="check__count" data-count="category:laptop">2</span></label>
+              </div>
+            </details>
+
+            <!-- Ціна -->
+            <details class="filter" open>
+              <summary class="filter__summary">
+                <span>Ціна, ₴</span>
+                <svg class="icon icon--sm filter__chevron"><use href="#i-chevron-down"/></svg>
+              </summary>
+              <div class="filter__body filter__body--price">
+                <div class="price-fields">
+                  <input class="field" id="price-min" name="priceMin" type="number" inputmode="numeric" min="0" step="100" value="23999" aria-label="Ціна від">
+                  <input class="field" id="price-max" name="priceMax" type="number" inputmode="numeric" min="0" step="100" value="49999" aria-label="Ціна до">
+                </div>
+                <div class="range" id="price-range" style="--from: 0%; --to: 100%;">
+                  <span class="range__track"></span>
+                  <input type="range" id="range-min" min="23999" max="49999" step="100" value="23999" aria-label="Мінімальна ціна">
+                  <input type="range" id="range-max" min="23999" max="49999" step="100" value="49999" aria-label="Максимальна ціна">
+                </div>
+              </div>
+            </details>
+
+            <!-- Бренд -->
+            <details class="filter" open>
+              <summary class="filter__summary">
+                <span>Бренд</span>
+                <svg class="icon icon--sm filter__chevron"><use href="#i-chevron-down"/></svg>
+              </summary>
+              <div class="filter__body" data-filter-group="brand">
+                <label class="check"><input type="checkbox" name="brand" value="Apple"><span class="check__label">Apple</span><span class="check__count" data-count="brand:Apple">3</span></label>
+                <label class="check"><input type="checkbox" name="brand" value="Samsung"><span class="check__label">Samsung</span><span class="check__count" data-count="brand:Samsung">2</span></label>
+                <label class="check"><input type="checkbox" name="brand" value="Lenovo"><span class="check__label">Lenovo</span><span class="check__count" data-count="brand:Lenovo">1</span></label>
+              </div>
+            </details>
+
+            <!-- Пам’ять -->
+            <details class="filter" open>
+              <summary class="filter__summary">
+                <span>Вбудована пам’ять</span>
+                <svg class="icon icon--sm filter__chevron"><use href="#i-chevron-down"/></svg>
+              </summary>
+              <div class="filter__body" data-filter-group="storage">
+                <label class="check"><input type="checkbox" name="storage" value="128"><span class="check__label">128 ГБ</span><span class="check__count" data-count="storage:128">3</span></label>
+                <label class="check"><input type="checkbox" name="storage" value="256"><span class="check__label">256 ГБ</span><span class="check__count" data-count="storage:256">2</span></label>
+                <label class="check"><input type="checkbox" name="storage" value="512"><span class="check__label">512 ГБ</span><span class="check__count" data-count="storage:512">1</span></label>
+              </div>
+            </details>
+
+            <!-- Наявність -->
+            <details class="filter" open>
+              <summary class="filter__summary">
+                <span>Наявність</span>
+                <svg class="icon icon--sm filter__chevron"><use href="#i-chevron-down"/></svg>
+              </summary>
+              <div class="filter__body" data-filter-group="inStock">
+                <label class="check"><input type="checkbox" name="inStock" value="true"><span class="check__label">Є в наявності</span><span class="check__count" data-count="inStock:true">6</span></label>
+              </div>
+            </details>
+
+            <button class="link-btn" type="reset" id="filters-reset">
+              <svg class="icon icon--sm"><use href="#i-reset"/></svg>
+              <span>Скинути всі фільтри</span>
+            </button>
+          </form>
+        </aside>
+
+        <!-- ---------- Список товарів ---------- -->
+        <div class="results">
+
+          <!-- Чипси категорій (дублюють фільтр «Категорія») -->
+          <div class="chips" id="category-chips" role="group" aria-label="Швидкий вибір категорії">
+            <button class="chip is-active" type="button" data-category="all" aria-pressed="true">Усі товари · <span data-count="all">6</span></button>
+            <button class="chip" type="button" data-category="smartphone" aria-pressed="false">Смартфони · <span data-count="category:smartphone">2</span></button>
+            <button class="chip" type="button" data-category="tablet" aria-pressed="false">Планшети · <span data-count="category:tablet">2</span></button>
+            <button class="chip" type="button" data-category="laptop" aria-pressed="false">Ноутбуки · <span data-count="category:laptop">2</span></button>
+          </div>
+
+          <!-- Сюди JS рендерить картки з products.json -->
+          <ul class="product-grid" id="product-grid" aria-busy="true"></ul>
+
+          <p class="grid-status" id="grid-status" role="status">Завантаження товарів…</p>
+
+          <div class="empty" id="empty-state" hidden>
+            <p class="empty__title">Нічого не знайдено</p>
+            <p class="empty__text">Спробуйте змінити або скинути фільтри.</p>
+            <button class="btn btn--outline" type="button" data-action="reset-filters">Скинути фільтри</button>
+          </div>
+
+          <p class="results__summary" id="results-summary">Показано 6 із 6 товарів</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===================== ШАБЛОН КАРТКИ ТОВАРУ =====================
+       JS: template.content.firstElementChild.cloneNode(true)
+       Текст/атрибути заповнюються через [data-field], події — через [data-action]. -->
+  <template id="product-card-template">
+    <li class="product-grid__item">
+      <article class="card" data-field="root">
+        <div class="card__top">
+          <span class="badge" data-field="badge"></span>
+          <button class="icon-btn" type="button" data-action="toggle-wishlist" aria-pressed="false" aria-label="Додати в обране">
+            <svg class="icon"><use href="#i-heart"/></svg>
+          </button>
+        </div>
+
+        <a class="card__media" data-field="link" href="#">
+          <img class="card__image" data-field="image" src="" alt="" loading="lazy" width="268" height="178">
+        </a>
+
+        <div class="card__body">
+          <p class="card__category" data-field="category"></p>
+          <h3 class="card__title"><a data-field="title-link" href="#"><span data-field="name"></span></a></h3>
+          <p class="card__subtitle" data-field="subtitle"></p>
+          <p class="card__specs" data-field="specs"></p>
+        </div>
+
+        <div class="card__meta">
+          <p class="stock" data-field="stock"></p>
+          <p class="rating">
+            <svg class="icon icon--xs icon--fill rating__star"><use href="#i-star"/></svg>
+            <span data-field="rating"></span>
+            <span class="rating__count">(<span data-field="reviews"></span>)</span>
+          </p>
+        </div>
+
+        <p class="price">
+          <span class="price__current" data-field="price"></span>
+          <s class="price__old" data-field="oldPrice" hidden></s>
+        </p>
+
+        <button class="btn btn--primary btn--block" type="button" data-action="add-to-cart">
+          <svg class="icon"><use href="#i-bag"/></svg>
+          <span data-field="cart-label">До кошика</span>
+        </button>
+      </article>
+    </li>
+  </template>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer__grid">
+        <div class="footer__brand">
+          <p class="footer__logo">ВОЛЬТ.</p>
+          <p class="footer__tagline">Твоя техніка. Твій ритм.</p>
+          <a class="footer__phone" href="tel:0800300125">0 800 300 125</a>
+          <p class="footer__note">Щодня, 09:00–20:00 · Безкоштовно в Україні</p>
+        </div>
+
+        <nav class="footer__col" aria-label="Каталог">
+          <h3 class="footer__heading">Каталог</h3>
+          <ul class="footer__list">
+            <li><a href="?category=smartphone">Смартфони</a></li>
+            <li><a href="?category=tablet">Планшети</a></li>
+            <li><a href="?category=laptop">Ноутбуки</a></li>
+          </ul>
+        </nav>
+
+        <nav class="footer__col" aria-label="Покупцям">
+          <h3 class="footer__heading">Покупцям</h3>
+          <ul class="footer__list">
+            <li><a href="#">Доставка й оплата</a></li>
+            <li><a href="#">Гарантія та повернення</a></li>
+            <li><a href="#">Питання й відповіді</a></li>
+          </ul>
+        </nav>
+
+        <nav class="footer__col" aria-label="Про ВОЛЬТ">
+          <h3 class="footer__heading">Про ВОЛЬТ</h3>
+          <ul class="footer__list">
+            <li><a href="#">Про магазин</a></li>
+            <li><a href="#">Контакти</a></li>
+            <li><a href="#">Наші магазини</a></li>
+          </ul>
+        </nav>
+      </div>
+
+      <div class="footer__bottom">
+        <p>© 2026 ВОЛЬТ. Усі права захищено.</p>
+        <p class="footer__legal"><a href="#">Політика конфіденційності</a><span aria-hidden="true">·</span><a href="#">Публічна оферта</a></p>
+        <p class="footer__pay">VISA &nbsp; Mastercard &nbsp; Pay</p>
+      </div>
+    </div>
+  </footer>
+
+  <button class="cart-backdrop" type="button" data-action="close-cart" aria-label="Закрити кошик" hidden></button>
+  <aside class="cart-drawer" id="cart-drawer" role="dialog" aria-modal="true"
+         aria-labelledby="cart-title" aria-hidden="true" hidden>
+    <div class="cart-drawer__header">
+      <div>
+        <h2 class="cart-drawer__title" id="cart-title">Кошик</h2>
+        <p class="cart-drawer__hint" id="cart-items-count">0 товарів</p>
+      </div>
+      <button class="icon-btn cart-drawer__close" type="button" data-action="close-cart" aria-label="Закрити кошик">
+        <span aria-hidden="true">×</span>
+      </button>
+    </div>
+
+    <div class="cart-drawer__body">
+      <p class="cart-empty" id="cart-empty">У кошику поки немає товарів.</p>
+      <ul class="cart-items" id="cart-items" aria-label="Товари у кошику"></ul>
+
+      <section class="checkout" id="checkout">
+        <div class="cart-total">
+          <span>Разом</span>
+          <strong id="cart-total">0 ₴</strong>
+        </div>
+        <h3 class="checkout__title">Контактні дані для замовлення</h3>
+        <p class="checkout__note">Заповніть телефон та email — ми використаємо їх для зв’язку щодо замовлення.</p>
+        <form class="checkout__form" id="checkout-form">
+          <label class="checkout__label" for="checkout-phone">Номер телефону</label>
+          <input class="field checkout__field" id="checkout-phone" name="phone" type="tel"
+                 autocomplete="tel" inputmode="tel" placeholder="+380 XX XXX XX XX" required>
+          <label class="checkout__label" for="checkout-email">Електронна пошта</label>
+          <input class="field checkout__field" id="checkout-email" name="email" type="email"
+                 autocomplete="email" placeholder="name@example.com" required>
+          <button class="btn btn--primary btn--block" type="submit">Оформити замовлення</button>
+        </form>
+        <p class="checkout__confirmation" id="checkout-confirmation" role="status" hidden></p>
+        <p class="checkout__demo-note">Демонстраційна форма: дані не надсилаються та не зберігаються.</p>
+      </section>
+    </div>
+  </aside>
+
+  <noscript>
+    <p class="noscript">Для відображення каталогу потрібно ввімкнути JavaScript.</p>
+  </noscript>
+</body>
+</html>
